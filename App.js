@@ -1,18 +1,14 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
-import HomeScreen from './screens/HomeScreen';
-import ExerciseScreen from './screens/ExerciseScreen';
-import WorkoutScreen from './screens/WorkoutScreen';
-import WorkingoutScreen from './screens/WorkingoutScreen';
+import MapScreen from './screens/MapsScreen';
+import LoginScreen from './screens/LoginScreen';
 
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Workout: props => <WorkoutScreen {...props}/>,
-    Exercise: props => <ExerciseScreen {...props}/>,
-    Workingout: props => <WorkingoutScreen {...props}/>,
+    Home: LoginScreen,
+    Map: props => <MapScreen {...props}/>
   },
   {
     initialRouteName: 'Home',
