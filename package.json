@@ -13,9 +13,7 @@
     "fetch": "^1.1.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
-    "react-native-collapsible": "^1.2.1",
     "react-native-maps": "^0.22.1",
-    "react-native-stopwatch-timer": "0.0.20",
     "react-navigation": "^2.18.0",
     "whatwg-fetch": "^2.0.4"
   }

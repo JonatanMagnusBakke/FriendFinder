@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  TextInput
+  TextInput, 
+  Alert
 } from 'react-native';
 
 export default class LoginScreen extends React.Component {
@@ -21,13 +22,58 @@ export default class LoginScreen extends React.Component {
     }
 
 
+    _tryToLogin = async () =>{
+      const response = await fetch("https://www.jbakke.dk/mini/api/login", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+        user: {
+          userName: this.state.username,
+				  password: this.state.password,
+        }
+			})
+		})
+    const json = await response.json();
+    if(json.error == false)
+    {
+      this.props.navigation.navigate('Map', this.state)
+    }
+    else if(json.status == "invalid password, please try again")
+    {
+      Alert.alert(
+        'Invalid Login',
+        'Wrong password',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }
+    else
+    {
+      Alert.alert(
+        'Invalid Login',
+        'Wrong Username',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }
+    
+    }
+  
   render() {
     return (
       <View style={styles.container}>
       <Text style={styles.header}>Friend Finder</Text>
       <TextInput style={styles.listItem} value={this.state.username} onChangeText={(username) => this.setState({username})}></TextInput>
       <TextInput style={styles.listItem} secureTextEntry={true} value={this.state.password} onChangeText={(password) => this.setState({password})}></TextInput>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Map', this.state)}>
+        <TouchableOpacity onPress={this._tryToLogin}>
           <View style={styles.login}>
           <Text style={styles.name}>Login</Text>
           </View>
@@ -53,8 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#25dd97',
     borderRadius:20,
     borderWidth: 1,
-    borderColor: '#fff',
-    fontSize: 20
+    borderColor: '#fff'
   },
   listItem: {
     textAlign: 'center',

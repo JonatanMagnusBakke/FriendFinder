@@ -16,21 +16,6 @@ const RootStack = createStackNavigator(
 );
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.setWorkout = this.setWorkout.bind(this);
-
-    this.state = {
-      workoutId: null
-    };
-  }
-
-  setWorkout(workoutId) {
-    this.setState({
-      workoutId
-    })
-  }
 
   render() {
     return <RootStack />;
