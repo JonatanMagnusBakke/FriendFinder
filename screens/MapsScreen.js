@@ -53,13 +53,16 @@ export default class MapScreen extends Component {
 
 	  _updatePos = async () => {
 		  this._getLocationAsync()
-		const response = await fetch("https://www.jbakke.dk/mini/api/updatePos", {
+		const response = await fetch("https://www.jbakke.dk/mini/api/login", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				userName: this.state.username,
+				user: {
+					userName: this.state.username,
+							password: this.state.password,
+				  },
 				longitude: this.state.location.coords.longitude,
 				latitude: this.state.location.coords.latitude
 			})
